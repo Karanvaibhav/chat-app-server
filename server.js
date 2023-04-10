@@ -16,7 +16,15 @@ app.use(express.json()); // to accept json data
 // app.get("/", (req, res) => {
 //   res.send("API Running!");
 // });
-app.use(cors());
+
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200,
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
