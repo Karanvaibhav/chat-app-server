@@ -18,7 +18,7 @@ app.use(express.json()); // to accept json data
 // });
 
 const corsOptions = {
-  origin: 'http://localhost:4200',
+  origin: '*',
   optionsSuccessStatus: 200,
   credentials: true
 };
