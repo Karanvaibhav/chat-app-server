@@ -17,11 +17,6 @@ app.use(express.json()); // to accept json data
 //   res.send("API Running!");
 // });
 
-const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-  credentials: true
-};
 
 app.use(cors());
 
