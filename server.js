@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const colors = require("colors");
+const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
@@ -12,7 +13,7 @@ const path = require("path");
 
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 // app.get("/", (req, res) => {
 //   res.send("API is Running ");
 // });
@@ -22,6 +23,7 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
 
 // --------------------------deployment------------------------------
+
 const __dirname1 = path.resolve();
 
 if (process.env.NODE_ENV === "production") {
@@ -41,16 +43,15 @@ if (process.env.NODE_ENV === "production") {
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 const server = app.listen(
   PORT,
   console.log(`server started on port ${PORT}`.yellow.bold)
 );
 
 const io = require("socket.io")(server, {
-  pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
     // credentials: true,
   },
 });
